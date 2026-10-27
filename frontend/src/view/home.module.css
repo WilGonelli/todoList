@@ -54,11 +54,9 @@
 }
 
 .dropbox {
-  background-color: aliceblue;
-  margin: 12px;
-  padding: 8px 12px;
+  background-color: rgb(242, 242, 242);
+  padding: 12px;
   color: black;
-  height: 18px;
   border-radius: 12px;
   position: relative;
   cursor: pointer;
@@ -72,7 +70,7 @@
 .dropbox p span {
   width: 30px;
   position: absolute;
-  top: 0;
+  top: 4px;
   right: 10px;
 }
 
@@ -88,14 +86,33 @@
 .dropbox ul li {
   background-color: #e7e7e7;
   width: 100%;
-  padding: 6px 12px;
-  border-top: 2px solid black;
+  padding: 12px;
+  border: 1px solid black;
   border-radius: 12px;
   box-sizing: border-box;
 }
 
 .dropbox ul.opened {
   display: block;
+}
+
+.submitBtn {
+  all: unset;
+  padding: 12px;
+  text-align: center;
+  background-color: rgb(75, 243, 150);
+  border-radius: 12px;
+  margin: 12px;
+  color: black;
+  cursor: pointer;
+  transition:
+    background-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.submitBtn:hover {
+  background-color: rgb(42, 164, 97);
+  color: #e7e7e7;
 }
 
 .right {
