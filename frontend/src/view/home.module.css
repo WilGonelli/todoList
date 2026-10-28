@@ -35,7 +35,8 @@
   gap: 6px;
 }
 
-.inputContainer label {
+.inputContainer label,
+.inputContainer .label {
   padding: 0 12px;
   font-size: 24px;
 }
@@ -47,6 +48,7 @@
   background-color: rgb(242, 242, 242);
   color: black;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .inputContainer input:focus {
@@ -110,7 +112,11 @@
     color 0.5s ease;
 }
 
-.submitBtn:hover {
+.submitBtn:disabled {
+  cursor: not-allowed;
+}
+
+.submitBtn:hover:not(:disabled) {
   background-color: rgb(42, 164, 97);
   color: #e7e7e7;
 }
@@ -120,4 +126,56 @@
   min-height: 100%;
   overflow-y: auto;
   border-left: 2px solid white;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-top: 12px;
+}
+
+.emptyContainer {
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyContainer p {
+  font-size: 22px;
+}
+
+.taskContainer {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  row-gap: 12px;
+  column-gap: 12px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.taskContainer li {
+  all: unset;
+  padding: 12px;
+  border: 2px solid white;
+  border-radius: 12px;
+  height: 100px;
+}
+
+.taskInfoContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.taskInfo p {
+  font-size: 18px;
 }

@@ -7,7 +7,7 @@ export default function useHomeViewModel() {
   const [status, setStatus] = useState<StatusType | "select">("select");
   const [dueDate, setDueDate] = useState<string | null>(null);
   const [open, setOpen] = useState<boolean>(false);
-  const tasks: TaskModel[] = [];
+  const [tasks, setTasks] = useState<TaskModel[]>([]);
 
   const addTask = () => {
     if (!name || !description || !dueDate || status === "select") return;
@@ -15,12 +15,19 @@ export default function useHomeViewModel() {
     const test = tasks.find((task) => task.name === name);
     if (test) return;
 
-    tasks.push({
-      name,
-      description,
-      status,
-      dueDate,
-    });
+    setTasks((prev) => [
+      ...prev,
+      {
+        name,
+        description,
+        status,
+        dueDate,
+      },
+    ]);
+    setName(null);
+    setDescription(null);
+    setDueDate(null);
+    setStatus("select");
   };
 
   return {

@@ -18,8 +18,6 @@ export default function Home() {
     addTask,
   } = useHomeViewModel();
 
-  console.log(tasks);
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>ToDo List</h1>
@@ -49,7 +47,7 @@ export default function Home() {
               />
             </div>
             <div className={styles.inputContainer}>
-              <label>Status</label>
+              <p className={styles.label}>Status</p>
               <div
                 className={styles.dropbox}
                 id="status"
@@ -111,12 +109,44 @@ export default function Home() {
                 e.preventDefault();
                 addTask();
               }}
+              disabled={
+                !name || !description || !dueDate || status === "select"
+              }
             >
               Submit
             </button>
           </form>
         </section>
-        <section className={styles.right}></section>
+        <section className={styles.right}>
+          <p className={styles.sectionTitle}>task list</p>
+          <ul className={styles.taskContainer}>
+            {tasks.length > 0 ? (
+              tasks.map((task, index) => {
+                return (
+                  <li key={index}>
+                    <div className={styles.taskInfoContainer}>
+                      <div className={styles.taskInfo} style={{ flex: 2 }}>
+                        <p>task name: {task.name}</p>
+                        <p>task description: {task.description}</p>
+                      </div>
+                      <div
+                        className={styles.taskInfo}
+                        style={{ alignItems: "flex-end", flex: 1 }}
+                      >
+                        <p>{task.status}</p>
+                        <p>due date: {task.dueDate}</p>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })
+            ) : (
+              <div className={styles.emptyContainer}>
+                <p>There is no task yet</p>
+              </div>
+            )}
+          </ul>
+        </section>
       </div>
     </div>
   );
