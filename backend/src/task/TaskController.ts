@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { TaskService } from './TaskService.js';
 import type { TaskModel } from './TaskModel.js';
 import type { ResponseData } from '../app.model.js';
@@ -8,8 +8,14 @@ export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
   @Get()
-  async getHealth(): Promise<ResponseData<TaskModel[]>> {
-    const response = await this.taskService.getTask();
-    return response;
+  async getTasks(): Promise<ResponseData<TaskModel[]>> {
+    return this.taskService.getTask();
+  }
+
+  @Post()
+  async postTask(
+    @Body() data: Omit<TaskModel, 'id'>,
+  ): Promise<ResponseData<TaskModel>> {
+    return this.taskService.createTask(data);
   }
 }
