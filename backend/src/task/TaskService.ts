@@ -32,6 +32,35 @@ export class TaskService {
     }
   }
 
+  async editTask(
+    id: string,
+    data: Omit<TaskModel, 'id'>,
+  ): Promise<ResponseData<TaskModel>> {
+    try {
+      tasks.map((task) => {
+        if (task.id !== id) return;
+        else {
+          ((task.description = data.description),
+            (task.title = data.title),
+            (task.status = data.status),
+            (task.dueDate = data.dueDate));
+          return;
+        }
+      });
+      return {
+        status: 'success',
+        msg: 'task alterada com sucesso',
+        data: { id, ...data },
+      };
+    } catch (err) {
+      return {
+        status: 'fail',
+        msg: 'falha ao editar task',
+        data: null as any,
+      };
+    }
+  }
+
   async getTask(): Promise<ResponseData<TaskModel[]>> {
     try {
       return {
