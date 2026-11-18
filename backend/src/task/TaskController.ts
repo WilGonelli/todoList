@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Put, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Put,
+  Param,
+  Query,
+  Delete,
+} from '@nestjs/common';
 import { TaskService } from './TaskService.js';
 import type { TaskModel } from './TaskModel.js';
 import type { ResponseData } from '../app.model.js';
@@ -25,5 +34,10 @@ export class TaskController {
     @Body() data: Omit<TaskModel, 'id'>,
   ): Promise<ResponseData<TaskModel>> {
     return this.taskService.editTask(id, data);
+  }
+
+  @Delete()
+  async deleteTask(@Query('id') id: string): Promise<ResponseData<null>> {
+    return this.taskService.deleteTask(id);
   }
 }

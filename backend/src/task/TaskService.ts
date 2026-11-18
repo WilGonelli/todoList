@@ -3,7 +3,7 @@ import type { TaskModel } from './TaskModel.js';
 import type { ResponseData } from '../app.model.js';
 import { TaskEntity } from './TaskEntity.js';
 
-const tasks: TaskModel[] = [];
+let tasks: TaskModel[] = [];
 
 @Injectable()
 export class TaskService {
@@ -72,6 +72,23 @@ export class TaskService {
       return {
         status: 'fail',
         msg: 'erro ao buscar a lista',
+        data: null as any,
+      };
+    }
+  }
+
+  async deleteTask(id: string): Promise<ResponseData<null>> {
+    try {
+      tasks = tasks.filter((task) => task.id !== id);
+      return {
+        status: 'success',
+        msg: 'task apagada com sucesso',
+        data: null as any,
+      };
+    } catch (err) {
+      return {
+        status: 'fail',
+        msg: 'erro ao apagar a task',
         data: null as any,
       };
     }
